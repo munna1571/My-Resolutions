@@ -1,0 +1,49 @@
+<head>
+    <title>resolutions</title>
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Bhaijaan" rel="stylesheet">
+</head>
+
+<body>
+<div class="container">
+    <header>
+        <h1>My Resolutions</h1>
+        <label class="hide-finished">
+            <input type="checkbox" checked="{{hideFinished}}">
+            Hide Finished Resolutions
+        </label>
+        <br><br>
+        {{#if currentUser}}
+            <form class="new-resolution">
+                <input type="text" name="title" placeholder="A new Resolution">
+                <input type="submit" value="Submit">
+            </form>
+        {{/if}}
+    </header>
+
+    <ul>
+        {{#each resolutions}}
+            {{> resolution}}
+        {{/each}}
+    </ul>
+
+    <p>My name is Munna and I am totally confused.</p>
+</div>
+{{> loginButtons}}
+</body>
+
+<template name="resolution">
+    <li class="{{#if checked}}checked{{/if}}">
+        <input type="checkbox" checked="{{checked}}" class="toggle-checked">
+        {{#if isOwner}}
+            <button class="toggle-private">
+                {{#if private}}
+                    Private
+                {{else}}
+                    Public
+                {{/if}}
+            </button>
+        {{/if}}
+        {{title}}
+        <button class="delete">Remove</button>
+    </li>
+</template>
